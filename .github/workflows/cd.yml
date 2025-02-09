@@ -69,7 +69,7 @@ jobs:
           key: ${{ secrets.AZURE_VM_SSH_KEY }}
           script: |
             # Stop existing containers
-            docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml down
+            # docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml down
             
             # Pull new images
             docker pull ${{ secrets.DOCKER_USERNAME }}/frontend:latest
