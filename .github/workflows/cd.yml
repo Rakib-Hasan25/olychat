@@ -69,7 +69,7 @@ jobs:
           key: ${{ secrets.AZURE_VM_SSH_KEY }}
           script: |
             # Stop existing containers
-            docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/ultimate-chat/searchtry/docker-compose.yml down
+            docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml down
             
             # Pull new images
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
@@ -77,4 +77,4 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/searchtry:latest
 
             # Start containers
-            docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/ultimate-chat/searchtry/docker-compose.yml up -d
+            docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml up -d
