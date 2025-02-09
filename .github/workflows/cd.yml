@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and push frontend image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest -f frontend/Dockerfile .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest -f frontend/Dockerfile ./frontend
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
 
       # CHATLLM
@@ -47,7 +47,7 @@ jobs:
 
       - name: Build and push chatllm image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/chatllm:latest -f chatllm/Dockerfile .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/chatllm:latest -f chatllm/Dockerfile ./chatllm
           docker push ${{ secrets.DOCKER_USERNAME }}/chatllm:latest
 
       # SEARCHTRY
@@ -57,7 +57,7 @@ jobs:
 
       - name: Build and push searchtry image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/searchtry:latest -f searchtry/Dockerfile .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/searchtry:latest -f searchtry/Dockerfile ./searchtry
           docker push ${{ secrets.DOCKER_USERNAME }}/searchtry:latest
 
       # DEPLOY TO AZURE VM
