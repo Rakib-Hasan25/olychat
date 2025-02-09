@@ -53,7 +53,7 @@ jobs:
       # SEARCHTRY
       - name: Create .env file for searchtry
         run: |
-          echo "SEARXNG_API_URL=${{ "http://searxng:8080" }}" >> searchtry/.env
+          echo "SEARXNG_API_URL=http://searxng:8080" >> searchtry/.env
 
       - name: Build and push searchtry image
         run: |
