@@ -72,9 +72,9 @@ jobs:
             docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml down
             
             # Pull new images
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/chatllm:latest
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/searchtry:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/chatllm:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/searchtry:latest
 
             # Start containers
             docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml up -d
