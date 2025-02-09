@@ -1,0 +1,13 @@
+chatllm/venv
+chatllm/.env
+frontend/node_modules
+frontend/.env
+searchtry/dist
+searchtry/node_modules
+searchtry/.env
+chatllm/operation/__pycache__ 
+chatllm/lib/__pycache__ 
+.vscode
+
+
+

@@ -1,0 +1,17 @@
+Flask
+youtube-transcript-api 
+openai
+python-dotenv
+langchain 
+langchain-openai
+langchain-core
+langchain-community
+flask-cors
+flask_socketio
+redis
+PyMuPDF
+pillow
+py-mon
+supabase
+gunicorn
+gevent-websocket

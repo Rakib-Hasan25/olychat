@@ -1,0 +1,27 @@
+name: Continuous Integration  # Name of the workflow
+
+on:
+  push:
+    branches:
+      - main  # Runs CI when pushing to the "main" branch
+  pull_request:
+    branches:
+      - main  # Runs CI when opening a pull request
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest  # The OS where the workflow runs
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Fetches your repo code
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3  # Enables advanced Docker builds
+
+      - name: Build Docker Images
+        run: |
+          cd searchtry  # Navigate to the searchtry folder where docker-compose.yml is
+          docker compose build  # Builds all Docker images
+
+      
