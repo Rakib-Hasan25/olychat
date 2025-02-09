@@ -1,9 +1,9 @@
 name: Continuous Integration  # Name of the workflow
 
 on:
-  push:
-    branches:
-      - main  # Runs CI when pushing to the "main" branch
+  # push:
+  #   branches:
+  #     - main  # Runs CI when pushing to the "main" branch
   pull_request:
     branches:
       - main  # Runs CI when opening a pull request
