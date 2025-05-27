@@ -9,7 +9,24 @@ on:
       - main  # Runs CI when opening a pull request
 
 jobs:
-  build-and-test:
+
+  landing-service-ci:
+    name: Landing Service CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: landing_service
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
+
+
+
+
+  Main-Service-ci:
+    name: Main Service CI
     runs-on: ubuntu-latest  # The OS where the workflow runs
 
     steps:
@@ -21,7 +38,6 @@ jobs:
 
       - name: Build Docker Images
         run: |
-          cd searchtry  # Navigate to the searchtry folder where docker-compose.yml is
-          docker compose build  # Builds all Docker images
+          docker compose build  
 
       

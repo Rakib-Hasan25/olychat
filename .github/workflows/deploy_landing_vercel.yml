@@ -1,0 +1,15 @@
+# name: Deploy Landing to Vercel (Production)
+
+# on:
+#   push:
+#     branches: [production]
+#     paths:
+#       - 'landing_service/**'
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Trigger Vercel Deployment
+#         run: |
+#           curl -X POST "https://api.vercel.com/v1/integrations/deploy/YOUR_VERCEL_HOOK"

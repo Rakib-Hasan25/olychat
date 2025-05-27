@@ -1,0 +1,96 @@
+name: CD Pipeline - Deploy to Azure 
+
+on:
+  push:
+    branches:
+      - [production]  
+    paths-ignore:
+      - 'landing_service/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # MAIN_FRONTEND_SERVICE
+      - name: Create .env file for main_frontend_service
+        run: |
+          echo "OPENAI_KEY=${{ secrets.OPENAI_API_KEY }}" >> main_frontend_service/.env
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> main_frontend_service/.env
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_SERVICE_KEY }}" >> main_frontend_service/.env
+          echo "NEXT_PUBLIC_MAIN_BACKEND_SERVICE_URL=${{ secrets.NEXT_PUBLIC_MAIN_BACKEND_SERVICE_URL }}" >> main_frontend_service/.env
+          echo "NEXT_PUBLIC_CHATLLM_SERVICE_URL=${{ secrets.NEXT_PUBLIC_CHATLLM_SERVICE_URL }}" >> main_frontend_service/.env
+          echo "MAIN_BACKEND_SERVICE_URL=${{ secrets.MAIN_BACKEND_SERVICE_URL }}" >> main_frontend_service/.env
+          echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> main_frontend_service/.env
+          echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> main_frontend_service/.env
+      
+
+      - name: Build and push frontend image
+        run: |
+          VERSION=$(date +'%Y%m%d_%H%M%S')
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:latest -f main_frontend_service/Dockerfile ./main_frontend_service
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:$VERSION
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:latest
+
+      
+      
+      
+      
+      
+      # MAIN_BACKEND_SERVICE
+      - name: Create .env file for main_backend_service
+        run: |
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY}}" >> main_backend_service/.env
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> main_backend_service/.env
+          echo "SUPABASE_SERVICE_KEY=${{ secrets.SUPABASE_SERVICE_KEY }}" >> main_backend_service/.env
+          echo "NODE_BACKEND_URL=${{ secrets.NODE_BACKEND_URL }}" >> main_backend_service/.env
+          echo "FLASK_APP=${{ secrets.FLASK_APP }}" >> main_backend_service/.env
+          echo "REDIS_HOST=${{ secrets.REDIS_HOST}}" >> main_backend_service/.env
+
+
+      - name: Build and push main_backend_service image
+        run: |
+          VERSION=$(date +'%Y%m%d_%H%M%S')
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:latest   -f main_backend_service/Dockerfile ./main_backend_service
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:$VERSION
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:latest
+
+      # Search Service
+      - name: Create .env file for Search Service
+        run: |
+          echo "SEARXNG_API_URL=http://searxng:8080" >> search_service/.env
+
+      - name: Build and push search_service image
+        run: |
+          VERSION=$(date +'%Y%m%d_%H%M%S')
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:latest -f search_service/Dockerfile ./search_service
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:$VERSION
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:latest
+
+      # DEPLOY TO AZURE VM
+      # - name: Deploy to Azure VM
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.AZURE_VM_IP }}
+      #     username: ${{ secrets.AZURE_VM_USERNAME }}
+      #     key: ${{ secrets.AZURE_VM_SSH_KEY }}
+      #     script: |
+      #       # Stop existing containers
+      #       # docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml down
+            
+      #       # Pull new images
+      #       docker pull ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+      #       docker pull ${{ secrets.DOCKER_USERNAME }}/chatllm:latest
+      #       docker pull ${{ secrets.DOCKER_USERNAME }}/searchtry:latest
+
+      #       # Start containers
+      #       docker compose -f /home/${{ secrets.AZURE_VM_USERNAME }}/searchtry/docker-compose.yml up -d

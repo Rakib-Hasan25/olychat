@@ -1,0 +1,170 @@
+# services:
+#   searxng:
+#     image: docker.io/searxng/searxng:latest
+#     volumes:
+#       - ./searxng:/etc/searxng:rw
+#     ports:
+#       - 4000:8080
+#     networks:
+#       - perplexica-network
+    
+#     restart: unless-stopped
+
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: backend.dockerfile
+#     image: searchtrybackend
+#     environment:
+#       - SEARXNG_API_URL=http://searxng:8080
+#     depends_on:
+#       - searxng
+#     ports:
+#       - 3001:3001
+#     networks:
+#       - perplexica-network
+#     extra_hosts:
+#       - 'host.docker.internal:host-gateway'  
+#     restart: unless-stopped
+# networks:
+#   perplexica-network:
+
+
+
+# version: '3.8'
+
+# services:
+#   searxng:
+#     image: docker.io/searxng/searxng:latest
+#     volumes:
+#       - ./searxng:/etc/searxng:rw
+#     ports:
+#       - 8080:8080
+#     networks:
+#       - app-network
+#   redis:
+#     image: redis/redis-stack:latest
+#     container_name: redis
+#     ports:
+#       - "6379:6379"
+#     networks:
+#       - app-network  
+
+#   searchtry:
+#     build:
+#       context: .  # Since docker-compose.yml is inside searchtry, use `.`
+#       dockerfile: backend.dockerfile
+#     container_name: searchtry-new
+#     ports:
+#       - "3001:3001"
+#     depends_on:
+#       - searxng 
+#     environment:
+#       - SEARXNG_API_URL=http://searxng:8080  
+#     networks:
+#       - app-network
+
+#   chatllm:
+#     build:
+#       context: ../chatllm/  # Correct path
+#     container_name: chatllm-new
+#     depends_on:
+#       - searchtry
+#       - redis
+#     ports:
+#       - "5000:5000"
+#     environment:
+#       - NODE_BACKEND_URL=http://searchtry:3001
+#       - REDIS_HOST=redis
+#     networks:
+#       - app-network
+
+#   frontend:
+#     build:
+#       context: ../frontend/  
+#     container_name: frontend-new
+#     depends_on:
+#       - chatllm
+#       - redis
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - NEXT_PUBLIC_API_URL=http://chatllm:5000
+#     networks:
+#       - app-network
+
+
+# networks:
+#   app-network:
+#     driver: bridge
+
+
+
+
+
+
+# version: '3.8'
+
+# services:
+#   searxng:
+#     image: docker.io/searxng/searxng:latest
+#     volumes:
+#       - ./searxng:/etc/searxng:rw
+#     ports:
+#       - 8080:8080
+#     networks:
+#       - app-network
+#   redis:
+#     image: redis/redis-stack:latest
+#     container_name: redis
+#     ports:
+#       - "6379:6379"
+#     networks:
+#       - app-network  
+
+#   searchtry:
+#       # context: .  # Since docker-compose.yml is inside searchtry, use `.`
+#       # dockerfile: backend.dockerfile
+#     image: rakibhasan25/searchtry:latest 
+#     container_name: searchtry-new
+#     ports:
+#       - "3001:3001"
+#     depends_on:
+#       - searxng 
+#     environment:
+#       - SEARXNG_API_URL=http://searxng:8080  
+#     networks:
+#       - app-network
+
+#   chatllm:
+#     # Correct path
+#     image: rakibhasan25/chatllm:latest 
+#     container_name: chatllm-new
+#     depends_on:
+#       - searchtry
+#       - redis
+#     ports:
+#       - "5000:5000"
+#     environment:
+#       - NODE_BACKEND_URL=http://searchtry:3001
+#       - REDIS_HOST=redis
+#     networks:
+#       - app-network
+
+#   frontend:
+#     image: rakibhasan25/frontend:latest  
+#     container_name: frontend-new
+#     depends_on:
+#       - chatllm
+#       - redis
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - NEXT_PUBLIC_API_URL=http://chatllm:5000
+#     networks:
+#       - app-network
+
+
+# networks:
+#   app-network:
+#     driver: bridge

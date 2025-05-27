@@ -8,6 +8,8 @@ searchtry/.env
 chatllm/operation/__pycache__ 
 chatllm/lib/__pycache__ 
 .vscode
+landing_service/.env
+landing_service/node_modules
 
 
 
