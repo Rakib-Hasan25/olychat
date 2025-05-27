@@ -53,7 +53,6 @@ jobs:
           echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> main_backend_service/.env
           echo "SUPABASE_SERVICE_KEY=${{ secrets.SUPABASE_SERVICE_KEY }}" >> main_backend_service/.env
           echo "NODE_BACKEND_URL=${{ secrets.NODE_BACKEND_URL }}" >> main_backend_service/.env
-          echo "FLASK_APP=${{ secrets.FLASK_APP }}" >> main_backend_service/.env
           echo "REDIS_HOST=${{ secrets.REDIS_HOST}}" >> main_backend_service/.env
 
 
