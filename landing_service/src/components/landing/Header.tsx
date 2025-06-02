@@ -23,9 +23,11 @@ export const Header = () => {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-2"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-            <span className="text-white font-bold">O</span>
-          </div>
+          <img 
+              src="/oly_chat_logo.png" 
+              alt="OlyChat Logo" 
+              className="h-12 w-auto mt-[1.6px]"
+            />
           <h1 className="text-xl font-bold">OlyChat</h1>
         </motion.div>
 

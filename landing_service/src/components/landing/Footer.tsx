@@ -10,9 +10,11 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                <span className="text-white font-bold">O</span>
-              </div>
+            <img 
+              src="/oly_chat_logo.png" 
+              alt="OlyChat Logo" 
+              className="h-8 w-auto"
+            />
               <h2 className="text-xl font-bold">OlyChat</h2>
             </div>
             <p className="text-gray-500 mb-6 max-w-xs">
@@ -70,7 +72,7 @@ export const Footer = () => {
 
         <div className="border-t border-gray-200 pt-8">
           <p className="text-sm text-gray-400 text-center">
-            &copy; {currentYear}OlyChat. All rights reserved. Open-source under MIT License.
+            &copy; {currentYear}OlyChat. All rights reserved.
           </p>
         </div>
       </div>

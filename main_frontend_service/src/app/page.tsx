@@ -20,11 +20,7 @@ export default function Home() {
                 Get Started
               </Button>
             </Link>
-            <Link href="/auth/register">
-              <Button size="lg" variant="outline" className="px-8 py-6 text-lg">
-                Create Account
-              </Button>
-            </Link>
+           
           </div>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">

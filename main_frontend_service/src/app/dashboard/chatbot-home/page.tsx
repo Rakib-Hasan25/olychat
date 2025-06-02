@@ -8,6 +8,10 @@ export default function Chatbot() {
             Here you will create custom chatbots to embed and use anywhere.<br/>
             (Feature coming soon — contribute on GitHub!)
           </p>
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl text-center text-base mb-6">
+          This platform is open source — contribute & make AI accessible to everyone. 
+          <a href="https://github.com/Rakib-Hasan25/olychat" target="_blank" rel="noopener noreferrer" className="ml-1 text-purple-600 hover:underline font-medium">View on GitHub.</a>
+        </p>
         </div>
       </div>
     );

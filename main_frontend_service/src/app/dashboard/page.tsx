@@ -69,8 +69,12 @@ export default function Dashboard() {
       {/* Header */}
       <header className="flex items-center justify-between p-6 shadow-sm bg-white/60 dark:bg-black/60 backdrop-blur-lg">
         <div className="flex items-center gap-3">
-          <span className="bg-gradient-to-br from-purple-400 to-purple-700 text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center text-xl">A</span>
-          <span className="font-bold text-2xl">AI Platform</span>
+          <img 
+              src="/oly_chat_logo.png" 
+              alt="OlyChat Logo" 
+              className="h-12 w-auto mt-[1.6px]"
+            />
+          <span className="font-bold text-2xl">OlyChat</span>
         </div>
         <div className="flex items-center space-x-3">
           <div className="flex items-center gap-2 bg-secondary px-3 py-1 rounded-lg">
@@ -128,7 +132,7 @@ export default function Dashboard() {
         </div>
         <p className="text-gray-500 dark:text-gray-400 max-w-xl text-center text-base mb-6">
           This platform is open source — contribute & make AI accessible to everyone. 
-          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="ml-1 text-purple-600 hover:underline font-medium">View on GitHub.</a>
+          <a href="https://github.com/Rakib-Hasan25/olychat" target="_blank" rel="noopener noreferrer" className="ml-1 text-purple-600 hover:underline font-medium">View on GitHub.</a>
         </p>
       </main>
     </div>
