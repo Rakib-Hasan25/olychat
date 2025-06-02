@@ -310,10 +310,19 @@ SEARXNG_API_URL=http://searxng:8080
 | Service           | Docker Image                                  | Pull Command                                                      |
 |-------------------    ------------------------------------------- |--------------------------------------------------------------------|
 | Frontend          | `rakibhasan25/olychat_main_frontend_service`  | `docker pull rakibhasan25/olychat_main_frontend_service:latest`    |
-| Backend           | `rakibhasan25/olychat_main_backend_service`   | `docker pull rakibhasan25/olychat_main_backend_service:latest     |
+| Backend           | `rakibhasan25/olychat_main_backend_service`   | `docker pull rakibhasan25/olychat_main_backend_service:latest`     |
 | Search Service    | `rakibhasan25/olychat_search_service`         | `docker pull rakibhasan25/olychat_search_service:latest`      |
 
 ```
+
+# 📧 Join our Community 
+For questions, suggestions, or feedback, feel free to reach out:
+
+- Twitter: [Olychat](https://x.com/olychatAI)
+- Discord: [Olychat](https://discord.gg/Kw6QWmHj)
+- Youtube: [Olychat](https://youtube.com/@olychat)
+
+
 
 # 📧 Contact 
 
