@@ -3,7 +3,7 @@ name: CD Pipeline - Deploy to Azure
 on:
   push:
     branches:
-      - [production]  
+      - production  
     paths-ignore:
       - 'landing_service/**'
 
@@ -37,9 +37,9 @@ jobs:
       - name: Build and push frontend image
         run: |
           VERSION=$(date +'%Y%m%d_%H%M%S')
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:latest -f main_frontend_service/Dockerfile ./main_frontend_service
-          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:$VERSION
-          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_frontend_service:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat_main_frontend_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat_main_frontend_service:latest -f main_frontend_service/Dockerfile ./main_frontend_service
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat_main_frontend_service:$VERSION
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat_main_frontend_service:latest
 
       
       
@@ -53,16 +53,15 @@ jobs:
           echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> main_backend_service/.env
           echo "SUPABASE_SERVICE_KEY=${{ secrets.SUPABASE_SERVICE_KEY }}" >> main_backend_service/.env
           echo "NODE_BACKEND_URL=${{ secrets.NODE_BACKEND_URL }}" >> main_backend_service/.env
-          echo "FLASK_APP=${{ secrets.FLASK_APP }}" >> main_backend_service/.env
           echo "REDIS_HOST=${{ secrets.REDIS_HOST}}" >> main_backend_service/.env
 
 
       - name: Build and push main_backend_service image
         run: |
           VERSION=$(date +'%Y%m%d_%H%M%S')
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:latest   -f main_backend_service/Dockerfile ./main_backend_service
-          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:$VERSION
-          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/main_backend_service:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat_main_backend_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat_main_backend_service:latest   -f main_backend_service/Dockerfile ./main_backend_service
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat_main_backend_service:$VERSION
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat_main_backend_service:latest
 
       # Search Service
       - name: Create .env file for Search Service
@@ -72,9 +71,9 @@ jobs:
       - name: Build and push search_service image
         run: |
           VERSION=$(date +'%Y%m%d_%H%M%S')
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:latest -f search_service/Dockerfile ./search_service
-          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:$VERSION
-          docker push ${{ secrets.DOCKER_USERNAME }}/olychat/search_service:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/olychat_search_service:$VERSION -t ${{ secrets.DOCKER_USERNAME }}/olychat_search_service:latest -f search_service/Dockerfile ./search_service
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat_search_service:$VERSION
+          docker push ${{ secrets.DOCKER_USERNAME }}/olychat_search_service:latest
 
       # DEPLOY TO AZURE VM
       # - name: Deploy to Azure VM
