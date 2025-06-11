@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
 import { handleGetStarted } from "@/lib/auth";
+import { useState } from 'react';
 
 export const Hero = () => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
   return (
     <section className="relative pt-32 mt-28 pb-20 overflow-hidden">
       {/* Gradient background */}
@@ -14,21 +17,21 @@ export const Hero = () => {
       <div className="absolute top-60 left-[15%] w-80 h-80 bg-pink-100 rounded-full filter blur-3xl opacity-20 animate-pulse-glow animation-delay-500"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="flex flex-col items-center justify-center gap-16">
           {/* Hero content */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="w-full md:w-1/2 space-y-6"
+            className="text-center max-w-3xl mx-auto space-y-6"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               Open-Source <span className="text-gradient">AI Platform</span> for Modern Applications
             </h1>
-            <p className="text-lg text-gray-600 md:text-xl max-w-lg">
+            <p className="text-lg text-gray-600 md:text-xl max-w-2xl mx-auto">
               Create, customize and deploy powerful AI solutions with our open-source platform.
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Button 
                 onClick={handleGetStarted}
                 size="lg" 
@@ -56,55 +59,51 @@ export const Hero = () => {
             </div> */}
           </motion.div>
           
-          {/* Hero image */}
+          {/* Demo Video Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full md:w-1/2 relative"
+            className="w-full max-w-4xl mx-auto"
           >
-            <div className="relative rotate-3d">
-              <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-100">
-                <div className="h-8 bg-gray-100 flex items-center px-4 gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                  <div className="ml-4 h-4 w-1/2 bg-gray-200 rounded"></div>
-                </div>
-                <div className="bg-gray-50 p-4 flex flex-col gap-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-purple-200 flex-shrink-0"></div>
-                    <div className="bg-purple-100 px-4 py-3 rounded-2xl rounded-tl-none">
-                      <p className="text-sm">How can I assist you today?</p>
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl border border-gray-100">
+              {!isVideoPlaying ? (
+                <>
+                  <div 
+                    className="absolute inset-0 bg-gray-900/10 flex items-center justify-center cursor-pointer"
+                    onClick={() => setIsVideoPlaying(true)}
+                  >
+                    <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-all duration-300">
+                      <svg 
+                        className="w-10 h-10 text-purple-600" 
+                        fill="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 justify-end">
-                    <div className="bg-gray-200 px-4 py-3 rounded-2xl rounded-tr-none">
-                      <p className="text-sm">I need to create a custom chatbot for my website</p>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0"></div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-purple-200 flex-shrink-0"></div>
-                    <div className="bg-purple-100 px-4 py-3 rounded-2xl rounded-tl-none">
-                      <p className="text-sm">I can help with that! Would you like to use our templates or build a custom solution from scratch?</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4 border-t flex items-center gap-2">
-                  <div className="bg-gray-100 h-10 flex-1 rounded-full px-4"></div>
-                  <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                      <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-softgreen rounded-lg -z-10 animate-float"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-softyellow rounded-lg -z-10 animate-float animation-delay-300"></div>
+                  <img 
+                    src="https://img.youtube.com/vi/VqmWAdsllZk/maxresdefault.jpg" 
+                    alt="Video thumbnail" 
+                    className="w-full h-full object-cover"
+                  />
+                </>
+              ) : (
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/VqmWAdsllZk?autoplay=1"
+                  title="Demo Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              )}
             </div>
+            
+            {/* Decorative elements */}
+            <div className="absolute -top-4 -right-4 w-20 h-20 bg-softgreen rounded-lg -z-10 animate-float"></div>
+            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-softyellow rounded-lg -z-10 animate-float animation-delay-300"></div>
           </motion.div>
         </div>
       </div>
